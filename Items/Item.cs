@@ -8,7 +8,7 @@ namespace MinecraftCM.Items
 {
     internal class Item
     {
-        public string diamond { get; set; }
-        public int quantity { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public int Quantity { get; set; }
     }
 }
