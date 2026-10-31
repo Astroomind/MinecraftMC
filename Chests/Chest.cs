@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using MinecraftCM.Items;
+﻿using MinecraftCM.Items;
 
 namespace MinecraftCM.Chests
 {
@@ -14,8 +7,8 @@ namespace MinecraftCM.Chests
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public List<Item> Items { get; set; } = new List<Item>();
-        public int ChestId { get; set; }
 
+        public int ChestId { get; set; }
         public void AddItem(Item item)
         {
             Items.Add(item);

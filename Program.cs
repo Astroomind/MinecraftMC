@@ -10,39 +10,62 @@ Console.WriteLine("""
     Would you like to add a chest or view your saved chests?
      Press 1 to add a chest.
      Press 2 to view your saved chests.
+     Press 3 to Exit.
     """);
-int userChoice = Convert.ToInt32(Console.ReadLine());
+string? userChoice = Console.ReadLine();
 
-if (userChoice == 1)
+try
 {
-    Console.WriteLine("What would you like to calll your chest?.");
-    var chest = new Chest { Name = Console.ReadLine() ?? "" };
+    // Convert string to int using Parse
+    int numberChoice = int.Parse(userChoice);
 
-    while (true)
+    Console.WriteLine($"You entered: {numberChoice}");
+
+    if (numberChoice == 1)
     {
-        Console.WriteLine("Item name (Leave blank to finish): ");
-        string? itemName = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(itemName)) break;
+        Console.Write("What would you like to call your chest? ");
+        var chest = new Chest { Name = Console.ReadLine() ?? "" };
 
-        Console.Write("How many? ");
-        if (!int.TryParse(Console.ReadLine(), out int quantity))
+        while (true)
         {
-            Console.WriteLine("That's not a number,  try again");
-            continue;
+            Console.Write("Item name (Leave blank to finish): ");
+            string? itemName = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(itemName)) break;
+
+            Console.Write("How many? ");
+            if (!int.TryParse(Console.ReadLine(), out int quantity))
+            {
+                Console.WriteLine("That's not a number, try again");
+                continue;
+            }
+
+            chest.AddItem(new Item { Name = itemName, Quantity = quantity });
         }
 
-        chest.AddItem(new Item { Name = itemName, Quantity = quantity });
+        db.Chests.Add(chest);
+        db.SaveChanges();
+        Console.WriteLine("Chest Saved!");
     }
-
-    db.Chests.Add(chest);
-    db.SaveChanges();
-    Console.WriteLine("Chest Saved!");
-}
-else if (userChoice == 2)
-{
-    var allChests = db.Chests.Include(c => c.Items).ToList();
-    foreach (var c in allChests)
+    else if (numberChoice == 2)
     {
-        c.ShowContents();
+        var allChests = db.Chests.Include(c => c.Items).ToList();
+        foreach (var c in allChests)
+        {
+            c.ShowContents();
+        }
+    }
+    else if (numberChoice == 3)
+    {
+        Console.WriteLine("Goodbye.");
+        Environment.Exit(0);
     }
 }
+catch (FormatException)
+{
+    Console.WriteLine("Error: The input is not a valid integer.");
+}
+catch (OverflowException)
+{
+    Console.WriteLine("Error: The number is too large or too small for an int.");
+}
+
