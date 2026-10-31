@@ -15,19 +15,19 @@ int userChoice = Convert.ToInt32(Console.ReadLine());
 
 if (userChoice == 1)
 {
-    Console.WriteLine("What would you like to calll your chest?.");
+    Console.Write("What would you like to call your chest? ");
     var chest = new Chest { Name = Console.ReadLine() ?? "" };
 
     while (true)
     {
-        Console.WriteLine("Item name (Leave blank to finish): ");
+        Console.Write("Item name (Leave blank to finish): ");
         string? itemName = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(itemName)) break;
 
         Console.Write("How many? ");
         if (!int.TryParse(Console.ReadLine(), out int quantity))
         {
-            Console.WriteLine("That's not a number,  try again");
+            Console.WriteLine("That's not a number, try again");
             continue;
         }
 
