@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MinecraftCM
-{
-    class README
-    {
-    # Minecraft Chest Manager
+﻿# Minecraft Chest Manager
 
 A C# console app for keeping track of what's in your Minecraft chests.
 Create named chests, add items and quantities, and view everything you've saved.
@@ -43,5 +33,3 @@ Data is stored in a local SQLite database using Entity Framework Core.
 
 - A menu loop so you can add and view chests in one session
 - Editing and deleting chests
-    }
-}
